@@ -60,7 +60,7 @@ int main (){
         scanf("%f", &nota1);
         printf("Digite sua segunda nota: ");
         scanf("%f", &nota2);
-        if (nota1 > 11 && nota1 >= 0 && nota2 > 11 && nota2 >= 0 ){
+        if (nota1 <= 10 && nota1 >= 0 && nota2 <= 10 && nota2 >= 0 ){
         media = (nota1 + nota2)/2;
         printf("Sua media e: %.2f. O calculo da media e: (%.2f+%.2f)/2", media, nota1, nota2);
         } else{
