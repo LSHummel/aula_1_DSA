@@ -19,6 +19,7 @@ int main(){
     int opcao, fechar;
     int carro_atual=0;
 
+    float fator_tempo=1.0;
     // Vetores para armazenar varios carros
     float total_kwh[100];
     float porcentagem[100];
@@ -52,10 +53,27 @@ int main(){
                     printf("A porcentagem esta errada, digite novamente (0 ate 100):\n");
                     scanf("%f", &porcentagem[carro_atual]);
                 }
-
                 // Calculos
+
+                if(carro_atual > 9){
+                    printf("\n");
+                    printf("ERRO NO SISTEMA!\n");
+                    printf("Quantidade maxima excedida!\n");
+                    printf("O sistema foi desligado instantaneamente.\n");
+                    printf("Dados da sessao perdidos!\n");
+                    return 0;
+                }
+
+                if(carro_atual > 8){
+                    fator_tempo = 2.0;
+                }else if(carro_atual > 5){
+                    fator_tempo = 1.5;
+                }else if(carro_atual > 2){
+                    fator_tempo = 1.2;
+                }
+
                 ener_consumida[carro_atual] = total_kwh[carro_atual] - total_kwh[carro_atual] * (porcentagem[carro_atual] / 100);
-                tempo[carro_atual] = (ener_consumida[carro_atual] * 60) / 50;
+                tempo[carro_atual] = ((ener_consumida[carro_atual] * 60) / 50) * fator_tempo;
                 valor_total[carro_atual] = ener_consumida[carro_atual] * 2 + 1.80;
                 porcentagem_f[carro_atual] = 100 - porcentagem[carro_atual];
 
@@ -189,7 +207,8 @@ int main(){
                 break;
 
             case 7:
-
+                printf("Enviando dados da sessao...\n");
+                printf("Dados enviados com sucesso!\n");
                 printf("---- Fim da Simulacao ----\n");
                 break;
 
