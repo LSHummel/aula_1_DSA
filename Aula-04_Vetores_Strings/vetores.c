@@ -15,7 +15,7 @@ int main(){
     notas[1] = 7;
 
     for(int i = 0; i<2;i++){
-        printf("%f\n", notas[1]);
+        printf("%f\n", notas[i]);
     }
     printf("\n");
     printf("O tamanho do vetor: %d", sizeof(notas)/sizeof(notas[0]));
