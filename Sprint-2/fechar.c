@@ -1,6 +1,5 @@
-#include <stdio.h>
+#include<stdio.h>
 
-// FUNÇÃO DO MENU
 void menu(void){
     printf("================================\n");
     printf("    MENU - RECARGA DE BATERIA\n");
@@ -15,7 +14,8 @@ void menu(void){
     printf("Escolha uma opcao: ");
 }
 
-// FUNÇÃO DE FECHAR
+
+
 void close(int fechar){
     printf("Para voltar ao menu digite 0\n");
     scanf("%d", &fechar);
@@ -26,13 +26,14 @@ void close(int fechar){
                 case 0:
                     break;}
                 }
+
+
             }
 
-// CÓDIGO PRINCIPAL
+
 int main(){
 
-    int opcao;
-    int fechar=1;
+    int opcao, fechar, hora;
     int carro_atual=0;
 
     float fator_tempo=1.0;
@@ -44,7 +45,6 @@ int main(){
     float valor_total[100];
     float tempo[100];
     float porcentagem_f[100];
-    int hora[100];
 
     while(opcao != 7){
 
@@ -74,13 +74,13 @@ int main(){
                 }
 
                 printf("Digite o horario da recarga em horas (0 ate 23):\n");
-                scanf("%d", &hora[carro_atual]);
+                scanf("%d", &hora);
 
                 // Validação do horario
-                while(hora[carro_atual] < 0 || hora[carro_atual] > 23){
+                while(hora < 0 || hora > 23){
                     printf("HORARIO INVALIDO!");
                     printf("Digite o horario da recarga em horas (0 ate 23):\n");
-                    scanf("%d", &hora[carro_atual]);
+                    scanf("%d", &hora);
                 }
 
                 if(carro_atual > 9){
@@ -106,9 +106,7 @@ int main(){
 
                 // Taxa do horario
                 
-                if(6 < hora[carro_atual] && hora[carro_atual] <= 10){
-                    fator_horario=1.1;
-                }else if(16 < hora[carro_atual] && hora[carro_atual] <= 21){
+                if(6 < hora & hora <= 10 || 16 < hora & hora <= 21){
                     fator_horario=1.1;
                 }
 
@@ -135,86 +133,17 @@ int main(){
                 printf("\n");
 
                 printf("\n");
-                close(fechar);
+                printf("Para voltar ao menu digite 0\n");
+                scanf("%d", &fechar);
+                while(fechar != 0){
+                    printf("Para voltar ao menu digite 0\n");
+                    scanf("%d", &fechar);
+                    switch(fechar){
+                        case 0:
+                            break;}}
 
                 break;
-
-            case 3:
-
-                printf("=========================\n");
-                printf("Tempo estimado de recarga\n");
-                printf("=========================\n");
-
-                printf("Tempo de recarga: %.2f minutos\n", tempo[carro_atual]);
-                printf("\n");
-
-                printf("\n");
-                close(fechar);
-
-                break;
-
-            case 4:
-
-                printf("=========================\n");
-                printf("    Custo da recarga\n");
-                printf("=========================\n");
-
-                printf("Custo total: R$%.2f\n", valor_total[carro_atual]);
-                printf("\n");
-
-                printf("\n");
-                close(fechar);
-
-                break;
-
-            case 5:
-
-                printf("=========================\n");
-                printf("       RELATORIO\n");
-                printf("=========================\n");
-
-                for(int i = 0; i <= carro_atual; i++){
-
-                    printf("\n");
-                    printf("CARRO %d\n", i + 1);
-                    printf("-------------------------\n");
-                    printf("Horario da recarga: %d hora\n", hora[i]);
-                    printf("kWh do carro: %.2f\n", total_kwh[i]);
-                    printf("Porcentagem a carregar: %.0f%%\n", porcentagem_f[i]);
-                    printf("Energia consumida: %.2f kWh\n", ener_consumida[i]);
-                    printf("Tempo estimado: %.2f minutos\n", tempo[i]);
-                    printf("Custo total: R$%.2f\n", valor_total[i]);
-                    printf("-------------------------\n");
-                }
-                printf("\n");
-
-                printf("\n");
-                close(fechar);
-
-                break;
-
-            case 6:
-
-                carro_atual++;
-
-                printf("Novo carro selecionado!\n");
-                printf("Agora cadastre as informacoes do novo carro.\n\n");
-
-                printf("\n");
-                close(fechar);
-
-                break;
-
-            case 7:
-                printf("Enviando dados da sessao...\n");
-                printf("Dados enviados com sucesso!\n");
-                printf("---- Fim da Simulacao ----\n");
-                break;
-
-            default:
-                printf("Opcao invalida!\n");
-        }
-    }
-
+                    }
+                    }
     return 0;
 }
