@@ -110,7 +110,7 @@ int main(){
                     fator_horario=1.1;
                 }else if(16 < hora[carro_atual] && hora[carro_atual] <= 21){
                     fator_horario=1.1;
-                }
+                }else{fator_horario=1.0;}
 
                 ener_consumida[carro_atual] = total_kwh[carro_atual] - total_kwh[carro_atual] * (porcentagem[carro_atual] / 100);
                 tempo[carro_atual] = ((ener_consumida[carro_atual] * 60) / 50) * fator_tempo;
