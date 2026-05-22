@@ -43,6 +43,8 @@ int main(){
     float ener_consumida[100];
     float valor_total[100];
     float tempo[100];
+    int tempo_hora[100];
+    int tempo_min[100];
     float porcentagem_f[100];
     int hora[100];
 
@@ -112,9 +114,17 @@ int main(){
                     fator_horario=1.1;
                 }else{fator_horario=1.0;}
 
+                // Energia consumida pelo carro
                 ener_consumida[carro_atual] = total_kwh[carro_atual] - total_kwh[carro_atual] * (porcentagem[carro_atual] / 100);
-                tempo[carro_atual] = ((ener_consumida[carro_atual] * 60) / 50) * fator_tempo;
+                // Tempo da recarga em horas
+                tempo[carro_atual] = (ener_consumida[carro_atual] / 50) * fator_tempo;
+                // Tempo da recarga em horas inteiro
+                tempo_hora[carro_atual] = (int)(ener_consumida[carro_atual] / 50) * fator_tempo;
+                // Minutos da recarga
+                tempo_min[carro_atual] = (tempo[carro_atual] - tempo_hora[carro_atual]) * 60;
+                // Custo total
                 valor_total[carro_atual] = (ener_consumida[carro_atual] * 2 + 1.80) * fator_horario;
+                // Porcentagem que será carregada
                 porcentagem_f[carro_atual] = 100 - porcentagem[carro_atual];
 
                 printf("\n");
@@ -145,7 +155,7 @@ int main(){
                 printf("Tempo estimado de recarga\n");
                 printf("=========================\n");
 
-                printf("Tempo de recarga: %.2f minutos\n", tempo[carro_atual]);
+                printf("Tempo de recarga: %d hora e %d minutos\n", tempo_hora[carro_atual], tempo_min[carro_atual]);
                 printf("\n");
 
                 printf("\n");
@@ -182,7 +192,7 @@ int main(){
                     printf("kWh do carro: %.2f\n", total_kwh[i]);
                     printf("Porcentagem a carregar: %.0f%%\n", porcentagem_f[i]);
                     printf("Energia consumida: %.2f kWh\n", ener_consumida[i]);
-                    printf("Tempo estimado: %.2f minutos\n", tempo[i]);
+                    printf("Tempo estimado: %d hora e %d minutos\n", tempo_hora[i], tempo_min[i]);
                     printf("Custo total: R$%.2f\n", valor_total[i]);
                     printf("-------------------------\n");
                 }

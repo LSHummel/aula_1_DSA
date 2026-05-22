@@ -45,6 +45,7 @@ int main(){
     float valor_total[100];
     float tempo[100];
     int tempo_hora[100];
+    int tempo_min[100];
     float porcentagem_f[100];
 
     while(opcao != 7){
@@ -114,7 +115,7 @@ int main(){
                 ener_consumida[carro_atual] = total_kwh[carro_atual] - total_kwh[carro_atual] * (porcentagem[carro_atual] / 100);
                 tempo[carro_atual] = (ener_consumida[carro_atual] / 50) * fator_tempo;
                 tempo_hora[carro_atual] = (int)(ener_consumida[carro_atual] / 50) * fator_tempo;
-
+                tempo_min[carro_atual] = (tempo[carro_atual] - tempo_hora[carro_atual]) * 60;
                 valor_total[carro_atual] = (ener_consumida[carro_atual] * 2 + 1.80) * fator_horario;
                 porcentagem_f[carro_atual] = 100 - porcentagem[carro_atual];
 
@@ -152,7 +153,7 @@ int main(){
                 printf("Tempo estimado de recarga\n");
                 printf("=========================\n");
 
-                printf("Tempo de recarga: %.2f minutos\n", tempo[carro_atual]);
+                printf("Tempo de recarga: %d hora e %d minutos\n", tempo_hora[carro_atual], tempo_min[carro_atual]);
                 printf("\n");
 
                 printf("\n");
